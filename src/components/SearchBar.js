@@ -4,7 +4,21 @@ import { Paper, TextField } from '@material-ui/core';
 
 class SearchBar extends React.Component {
     state = {
-        searchItem: ''
+        searchTerm: ''
+    }
+
+    handleChange = (event) => {
+        this.setState({ searchTerm: event.target.value });
+    }
+
+    handleSubmit = (event) => {
+        const { searchTerm } = this.state;
+        const { onFormSubmit } = this.props;
+
+        onFormSubmit(searchTerm);
+
+        event.preventDefault();
+     
     }
 
     render(){
