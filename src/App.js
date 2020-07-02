@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { Grid, Grow } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
-import { SearchBar, VideoDetail } from './components'
+import { SearchBar, VideoDetail, VideoList } from './components'
 
 import youtube from './api/youtube';
 
 class App extends React.Component {
     state = {
-        video: [],
+        videos: [],
         selectedVideo: null
     }
 
@@ -22,10 +22,10 @@ class App extends React.Component {
             }
         });
         
-        this.setState({ video: response.data.item, selectedVideo: response.data.items[0] });
+        this.setState({ videos: response.data.items, selectedVideo: response.data.items[0] });
     }
     render() {
-        const { selectedVideo } = this.state;
+        const { selectedVideo, videos } = this.state;
         return(
             <Grid justify="center" container spacing={10}>
                 <Grid item xs={12}>
@@ -37,7 +37,7 @@ class App extends React.Component {
                             <VideoDetail video={ selectedVideo }/>
                         </Grid>
                         <Grid item xs={4}>
-                            {/* video list */}
+                            <VideoList videos={ videos }/>
                         </Grid>
                     </Grid>
                 </Grid>
